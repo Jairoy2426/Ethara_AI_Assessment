@@ -3,7 +3,7 @@
 This repository contains a full-stack Team Task Manager app.
 
 - **Backend**: Express + TypeScript + MongoDB (Mongoose) REST API
-- **Frontend**: React + Vite + Tailwind CSS UI
+- **Frontend**: React + Vite + Tailwind CSS UI.
 
 ## Backend Setup
 
