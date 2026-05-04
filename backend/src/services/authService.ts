@@ -26,7 +26,7 @@ export const verifyPassword = (password: string, hash: string) =>
 
 export const signAccessToken = (user: { id: string; role: "admin" | "member" }) => {
   return jwt.sign({ sub: user.id, role: user.role }, env.JWT_SECRET, {
-    expiresIn: env.JWT_EXPIRES_IN
+    expiresIn: env.JWT_EXPIRES_IN as any
   });
 };
 
