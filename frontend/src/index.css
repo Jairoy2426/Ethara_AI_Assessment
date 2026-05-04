@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --outer-bg: #d9cfff;
+  --main-bg: #121214;
+  --card-bg: #1c1c1f;
+  --text-main: #ffffff;
+  --text-muted: #9ca3af;
+  --accent: #b088f9;
+  --accent-glow: rgba(176, 136, 249, 0.4);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--outer-bg);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+@media (min-width: 1024px) {
+  #root {
+    padding: 2rem;
+  }
+}
+
+
+.font-display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+
+.app-container {
+  @apply flex-1 rounded-[2.5rem] md:rounded-[3rem] relative overflow-hidden flex flex-col shadow-2xl;
+  background-color: var(--main-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glowing-bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 70% 40%, rgba(200, 180, 255, 0.8) 0%, transparent 40%),
+    radial-gradient(circle at 30% 80%, rgba(150, 100, 255, 0.3) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.glowing-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,100 C300,300 500,0 800,200 S1200,500 1600,100' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1'/%3E%3Cpath d='M0,500 C400,200 600,600 1000,400 S1400,100 1600,600' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: cover;
+  pointer-events: none;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+
+.bento-card {
+  @apply rounded-[2rem] p-6 sm:p-8 backdrop-blur-xl border border-white/5 transition-all duration-300;
+  background-color: rgba(28, 28, 31, 0.6);
+}
+
+.bento-card:hover {
+  @apply border-white/10;
+  background-color: rgba(35, 35, 40, 0.7);
+}
+
+.bento-card-solid {
+  @apply rounded-[2rem] p-6 sm:p-8 border border-white/5;
+  background-color: var(--card-bg);
+}
+
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full bg-white text-black px-6 py-3 font-semibold transition-all hover:bg-gray-200 active:scale-95 text-sm;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-full bg-white/10 text-white px-6 py-3 font-semibold transition-all hover:bg-white/20 active:scale-95 border border-white/5 text-sm;
+}
+
+.btn-icon {
+  @apply flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:bg-white/20 active:scale-95 border border-white/5;
+}
+
+
+.input-base {
+  @apply w-full rounded-2xl bg-white/5 border border-white/10 px-5 py-4 text-white transition-all focus:outline-none focus:border-[var(--accent)] focus:bg-white/10 placeholder:text-gray-500 text-sm;
+}
+
+
+.badge {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider border;
+}
+
+.badge-outline {
+  @apply border-white/20 text-white bg-white/5;
+}
+
+.badge-accent {
+  border-color: rgba(176, 136, 249, 0.3);
+  color: var(--accent);
+  background-color: rgba(176, 136, 249, 0.1);
+}
+
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
