@@ -27,3 +27,12 @@ Note: Project creation and member management are admin-only. Ensure a user has t
 - **Projects**: `GET/POST/PATCH/DELETE /api/projects`, members at `/api/projects/:projectId/members`
 - **Tasks**: `GET/POST /api/tasks/:projectId`, `PATCH /api/tasks/:projectId/:taskId`, `PATCH /api/tasks/:projectId/:taskId/status`
 - **Dashboard**: `GET /api/dashboard`
+
+## Deployment
+
+This project is configured for deployment on **Vercel** using their experimental multi-service support.
+
+- The **Frontend** is served at the root `/`.
+- The **Backend** is served under the `/_/backend` prefix.
+
+Make sure to set the `MONGODB_URI` and `JWT_SECRET` in your Vercel project environment variables.
