@@ -28,11 +28,22 @@ Note: Project creation and member management are admin-only. Ensure a user has t
 - **Tasks**: `GET/POST /api/tasks/:projectId`, `PATCH /api/tasks/:projectId/:taskId`, `PATCH /api/tasks/:projectId/:taskId/status`
 - **Dashboard**: `GET /api/dashboard`
 
-## Deployment
+## VPS Deployment
 
-This project is configured for deployment on **Vercel** using their experimental multi-service support.
+This project is optimized for deployment on a Linux VPS (Ubuntu/Debian) using **Nginx** and **PM2**.
 
-- The **Frontend** is served at the root `/`.
-- The **Backend** is served under the `/_/backend` prefix.
+### 1. Backend (API)
+- Build the project: `cd backend && npm run build`
+- Start with PM2: `pm2 start vps-setup/ecosystem.config.js`
+- The API runs on port `4000`.
 
-Make sure to set the `MONGODB_URI` and `JWT_SECRET` in your Vercel project environment variables.
+### 2. Frontend (Static)
+- Build the project: `cd frontend && npm run build`
+- Serve the `frontend/dist` folder using Nginx.
+
+### 3. Nginx Reverse Proxy
+A sample Nginx configuration is provided in `vps-setup/nginx.conf`. It handles:
+- Serving the frontend at `https://ethara.herculesdev.in/`
+- Proxying `/api` requests to the backend service.
+
+Make sure to update your `frontend/.env` with `VITE_API_URL=https://ethara.herculesdev.in/api` before building.
