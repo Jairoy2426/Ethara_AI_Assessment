@@ -28,22 +28,21 @@ Note: Project creation and member management are admin-only. Ensure a user has t
 - **Tasks**: `GET/POST /api/tasks/:projectId`, `PATCH /api/tasks/:projectId/:taskId`, `PATCH /api/tasks/:projectId/:taskId/status`
 - **Dashboard**: `GET /api/dashboard`
 
-## VPS Deployment
+## Deployment (Vercel)
 
-This project is optimized for deployment on a Linux VPS (Ubuntu/Debian) using **Nginx** and **PM2**.
+For this full-stack app, it is recommended to deploy the **Backend** and **Frontend** as two separate projects on Vercel.
 
-### 1. Backend (API)
-- Build the project: `cd backend && npm run build`
-- Start with PM2: `pm2 start vps-setup/ecosystem.config.js`
-- The API runs on port `4000`.
+### 1. Backend Deployment
+1. Create a new project on Vercel and select this repository.
+2. Set the **Root Directory** to `backend`.
+3. Add your Environment Variables:
+   - `MONGODB_URI`
+   - `JWT_SECRET`
+4. Deploy. Vercel will use the `backend/vercel.json` configuration.
 
-### 2. Frontend (Static)
-- Build the project: `cd frontend && npm run build`
-- Serve the `frontend/dist` folder using Nginx.
-
-### 3. Nginx Reverse Proxy
-A sample Nginx configuration is provided in `vps-setup/nginx.conf`. It handles:
-- Serving the frontend at `https://ethara.herculesdev.in/`
-- Proxying `/api` requests to the backend service.
-
-Make sure to update your `frontend/.env` with `VITE_API_URL=https://ethara.herculesdev.in/api` before building.
+### 2. Frontend Deployment
+1. Create another new project on Vercel and select this repository.
+2. Set the **Root Directory** to `frontend`.
+3. Add your Environment Variable:
+   - `VITE_API_URL`: Set this to your **Backend's** Vercel URL (e.g., `https://your-backend.vercel.app/api`).
+4. Deploy. Vercel will automatically detect the Vite setup.
